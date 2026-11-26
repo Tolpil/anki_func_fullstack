@@ -127,7 +127,10 @@ def save_words(words: Dict[str, str],
     print(f'Было сохранено {len(words)} слов в файл {filename}')
 
 
-def main():
+def main() -> None:
+    """Запускает основной цикл приложения-тренажёра."""
+    words = load_words()
+    print(f'Было загружено {len(words)} слов из файла words.txt')
     while True:
         menu = '''Меню:
         1. Начать игру
@@ -137,7 +140,20 @@ def main():
         5. Выход
         '''
         print(menu)
-        menu_choice = input('Пункт меню: ')
+        menu_choice = input('Пункт меню: ').strip()
+        if menu_choice == '1':
+            start_game(words)
+        elif menu_choice == '2':
+            add_words(words)
+        elif menu_choice == '3':
+            train_until_mistake(words)
+        elif menu_choice == '4':
+            show_all_words(words)
+        elif menu_choice == '5':
+            save_words(words)
+            sys.exit()
+        else:
+            print('Неизвестный пункт меню')
 
 
 if __name__ == '__main__':
