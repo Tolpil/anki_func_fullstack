@@ -22,12 +22,28 @@ def load_words(filename: str = 'words.txt') -> Dict[str, str]:
     return words
 
 
-def print_statistics(score, total_time):
-    ...
+def print_statistics(score: int, total_time: float) -> None:
+    """Выводит итоговую статистику игры."""
+    print(f'Ваш итоговый счет: {score}')
+    if score > 0:
+        average = total_time / score
+        print(f'Время игры: {total_time:.2f} секунд '
+              f'(среднее время: {average:.2f} сек.)')
+    else:
+        print(f'Время игры: {total_time:.2f} секунд '
+              f'(среднее время: —)')
 
 
-def ask_and_check(word, correct):
-    ...
+def ask_and_check(word: str, correct: str) -> Tuple[bool, bool, float]:
+    """Спрашивает перевод слова и проверяет ответ."""
+    print(f'Ваше слово: {word}')
+    start_time = time.time()
+    answer = input('Ваш перевод: ')
+    answer_time = time.time() - start_time
+    if answer.strip().upper() == STOP_WORD:
+        return True, False, 0.0
+    is_correct = answer.strip().lower() == correct.strip().lower()
+    return False, is_correct, answer_time
 
 
 def start_game(words):
