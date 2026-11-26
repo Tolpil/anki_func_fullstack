@@ -46,8 +46,13 @@ def show_all_words(words):
     ...
 
 
-def save_words(words, filename):
-    ...
+def save_words(words: Dict[str, str],
+               filename: str = 'words.txt') -> None:
+    """Сохраняет словарь пар «слово, перевод» в текстовый файл."""
+    with open(filename, 'w', encoding='utf-8') as file:
+        for word, translation in words.items():
+            file.write(f'{word},{translation}\n')
+    print(f'Было сохранено {len(words)} слов в файл {filename}')
 
 
 def main():
