@@ -38,8 +38,17 @@ def train_until_mistake(words):
     ...
 
 
-def add_words(words):
-    ...
+def add_words(words: Dict[str, str]) -> None:
+    """Добавляет новые пары «слово - перевод» в словарь."""
+    print('Чтобы закончить, введите СТОП')
+    while True:
+        word = input('Введите слово: ')
+        if word.strip().upper() == STOP_WORD:
+            break
+        translation = input('Введите перевод: ')
+        if translation.strip().upper() == STOP_WORD:
+            break
+        words[word.strip()] = translation.strip()
 
 
 def show_all_words(words: Dict[str, str]) -> None:
