@@ -7,9 +7,19 @@ from typing import Dict, Tuple
 STOP_WORD = 'СТОП'
 
 
-def load_words(filename):
-	...
-    
+def load_words(filename: str = 'words.txt') -> Dict[str, str]:
+    """Загружает словарь пар «слово, перевод» из текстового файла."""
+    words: Dict[str, str] = {}
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            for line in file:
+                parts = line.strip().split(',')
+                if len(parts) == 2:
+                    words[parts[0].strip()] = parts[1].strip()
+    except FileNotFoundError:
+        print(f'Файл {filename} не найден.')
+        sys.exit(1)
+    return words
 
 
 def print_statistics(score, total_time):
