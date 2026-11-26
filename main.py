@@ -42,8 +42,10 @@ def add_words(words):
     ...
 
 
-def show_all_words(words):
-    ...
+def show_all_words(words: Dict[str, str]) -> None:
+    """Выводит все пары «слово - перевод» одной строкой."""
+    print('; '.join(f'{word} - {translation}'
+                    for word, translation in words.items()))
 
 
 def save_words(words: Dict[str, str],
