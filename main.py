@@ -71,8 +71,32 @@ def start_game(words: Dict[str, str]) -> None:
     print_statistics(score, total_time)
 
 
-def train_until_mistake(words):
-    ...
+def train_until_mistake(words: Dict[str, str]) -> None:
+    """Запускает режим «до первой ошибки»."""
+    if not words:
+        print('Словарь пуст. Добавьте слова для игры.')
+        return
+    print('Режим: Игра до первой ошибки! '
+          'Чтобы выйти вручную, введите СТОП')
+    score = 0
+    total_time = 0.0
+    word_list = list(words.keys())
+    while True:
+        word = random.choice(word_list)
+        correct = words[word]
+        is_stop, is_correct, answer_time = ask_and_check(word, correct)
+        if is_stop:
+            print('Выход из режима по запросу пользователя.')
+            break
+        total_time += answer_time
+        if is_correct:
+            score += 1
+            print(f'Верно! Всего очков: {score} '
+                  f'(ответ за {answer_time:.2f} секунд)')
+        else:
+            print(f'Ошибка! Неверно. Правильный ответ: {correct}')
+            break
+    print_statistics(score, total_time)
 
 
 def add_words(words: Dict[str, str]) -> None:
